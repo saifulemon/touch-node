@@ -4,6 +4,7 @@ const app = express();
 const port = 2000;
 
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (req, res) => {
   res.send('Hello from my second ever node');
@@ -31,6 +32,16 @@ app.get('/users', (req, res) => {
   else {
     res.send(users);
   }
+});
+
+
+// app-method
+app.post('/users', (req, res) => {
+  const newUser = req.body;
+  newUser.id = users.length;
+  users.push(newUser); 
+  console.log('hitting the post', req.body);  
+  res.json(newUser);
 });
 
 // dynamic API
